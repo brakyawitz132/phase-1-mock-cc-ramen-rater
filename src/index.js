@@ -7,14 +7,18 @@ let restaurant = document.querySelector(".restaurant")
 let rating = document.querySelector("#rating-display")
 let comment = document.querySelector("#comment-display")
 
-const form = document.querySelector("#new-ramen")
-
+const newRamenForm = document.querySelector("#new-ramen")
+const editRamenForm = document.querySelector("#edit-ramen")
 
 
 fetch("http://localhost:3000/ramens")
 .then(resp => resp.json())
 .then(data => {
     data.forEach(ramen => displayRamen(ramen))
+
+    ramenDetail(data[0])  // displays first ramen on the list as soon as page loads
+
+
 })
 
 function displayRamen(ramen) {
@@ -35,6 +39,7 @@ function ramenDetail(indiv) {
     comment.textContent = indiv.comment
 }
 
+
 let newRamen = {}
 let newName = document.querySelector("#new-name")
 let newRestaurant = document.querySelector("#new-restaurant")
@@ -42,7 +47,7 @@ let newImg = document.querySelector("#new-image")
 let newRating = document.querySelector("#new-rating")
 let newComment = document.querySelector("#new-comment")
 
-form.addEventListener("submit", (e) => {
+newRamenForm.addEventListener("submit", (e) => {
     e.preventDefault()
     newRamen.name = newName.value
     newRamen.restaurant = newRestaurant.value
@@ -52,4 +57,15 @@ form.addEventListener("submit", (e) => {
     displayRamen(newRamen)
 })
 
+
+let editRating = document.querySelector("#edit-rating")
+let editComment = document.querySelector("#edit-comment")
+
+editRamenForm.addEventListener("submit", (event) => {
+    event.preventDefault()
+    // rating = editRating.value
+    // comment = editComment.value
+    // console.log(rating);
+    // ramenDetail()
+})
 
